@@ -1,0 +1,18 @@
+---
+# tasks file for php
+- name: Install PHP 7 with the most common packages
+  yum: 
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - php
+    - php-pdo
+    
+  notify: restart Apache
+- name: Upload index.php file to the remote web directory
+  copy:
+    src: index.php
+    dest: /var/www/html
+    owner: centos
+    group: centos
+    
